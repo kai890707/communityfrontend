@@ -1,0 +1,15 @@
+.nav-title {
+    color: #f7941e !important;
+}
+
+.nav-text {
+    color: #f7941e !important;
+    text-decoration: none;
+    position: relative;
+    transition: 1s all;
+    border-bottom: 3px solid transparent;
+    &:hover {
+        border-bottom: 3px solid #f7941e;
+        ;
+    }
+}

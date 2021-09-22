@@ -1,0 +1,50 @@
+.sidebar-bg-color {
+    background-color: #FFC074 !important;
+}
+
+.option-text {
+    color: rgba(255, 255, 255, 1)!important;
+    &:hover {
+        color: #000!important;
+    }
+}
+
+.sidebar-suboption-fs {
+    font-size: 15px;
+}
+
+.backEnd-wrap-color {
+    background-color: rgba(147, 0, 60, 0.04) !important;
+}
+
+.rdw-editor-main {
+    background-color: white !important;
+    height: 80%!important;
+    min-height: 350px!important;
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+}
+
+.post-submit-btn {
+    background-color: #fff !important;
+    color: #FFC074!important;
+    border-color: #FFC074!important;
+    outline: #FFC074 !important;
+    &:hover {
+        background-color: #FFC074 !important;
+        color: #fff!important;
+    }
+}
+
+.filepond--credits {
+    display: none !important;
+}
+
+.image-upload-spot {
+    cursor: pointer;
+}
+
+.tab-text>li>button {
+    color: #FFC074 !important;
+    font-weight: bold;
+}

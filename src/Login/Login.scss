@@ -1,0 +1,43 @@
+$rose: #EDA2B6;
+$mantis: #ABBF4E;
+$cadet: #7A96A2;
+$metal: #252621;
+$gooseYellow: wheat;
+$success: #28a745;
+$orange: #FFC074;
+$ivory: #FAF1E6;
+$grass: #B6C867;
+$green: #01937C;
+.btn-outline-orange {
+    color: $orange!important;
+    background-color: #fff!important;
+    border: 1px solid $orange !important;
+}
+
+.btn-outline-orange:hover {
+    color: #fff!important;
+    background-color: $orange!important;
+}
+
+.form-check-input:checked {
+    background-color: $orange!important;
+    border-color: $orange!important;
+}
+
+.register {
+    color: #000!important;
+    font-size: 18px!important;
+    text-decoration: none!important;
+    transition: .5s all!important;
+}
+
+.register:hover {
+    color: $orange!important;
+}
+
+.col-bg {
+    background-image: url('../assets/images/S__8355849.jpg');
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+}
