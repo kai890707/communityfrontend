@@ -13,6 +13,7 @@ import Backend from '../Backend/Layout';
 import Config from '../Backend/Pages/Config'; 
 import AnnouncementList from '../Backend/Pages/AnnouncementList';
 import AddAnnouncement from '../Backend/Pages/AddAnnouncement';
+import AccountConfig from '../Backend/Pages/AccountConfig';
 const routes = [
     {
         path: '/',
@@ -39,6 +40,10 @@ const routes = [
                 path: '/addAnnouncement',
                 exact: true,
                 component: AddAnnouncement
+            },{
+                path: '/accountConfig',
+                exact: true,
+                component: AccountConfig
             }, 
             
         ]

@@ -121,7 +121,7 @@ const Layout = () => {
                         </Link>
                     </li>
                      <li className=" mt-2 mb-2 ">
-                        <Link to="" className="nav-link px-0 align-middle option-text" title="帳號設定">
+                        <Link to="accountConfig" className="nav-link px-0 align-middle option-text" title="帳號設定">
                             <i class="fs-6  fas fa-cogs"></i>
                             <span className="fs-6  ms-2 d-none d-sm-inline">帳號設定</span>
                         </Link>
