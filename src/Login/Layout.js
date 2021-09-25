@@ -7,8 +7,10 @@ import {
     Form,
     Button
 } from 'react-bootstrap';
-
-// import img1 from './../../assets/images/S__8347707.jpg';
+import {useForm} from "react-hook-form";
+import {getApi, postApi} from '../Api/Api';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import './Login.scss';
 const Login = () => {
     const style = {
@@ -38,17 +40,43 @@ const Login = () => {
         }, [key, value]);
         return [value, setValue];
     };
-    const [name, setName] = useLocalStorage("name", "");
-    const handleChange=()=> {
+    const [name,
+        setName] = useLocalStorage("name", "");
+    const handleChange = () => {
         let isChecked = document.querySelector('#rememberMe');
         let account = document.querySelector('#account');
-        if (isChecked.checked && account.value!="") {
-             setName(account.value);
+        if (isChecked.checked && account.value != "") {
+            setName(account.value);
         } else {
             setName("");
         }
-       
+
     }
+    const MySwal = withReactContent(Swal);
+    const {register, handleSubmit, watch} = useForm();
+    console.log(watch("example"));
+    const onSubmit = data => {
+        postApi('login', data).then((res) => {
+            console.log(res);
+
+            localStorage.setItem('token', res.access_token)
+            MySwal.fire({
+                title: <p>Hello World</p>,
+                footer: 'Copyright 2018',
+                didOpen: () => {
+                    // `MySwal` is a subclass of `Swal`   with all the same instance & static
+                    // methods
+                    MySwal.clickConfirm()
+                }
+            }).then(() => {
+                return MySwal.fire(
+                    <p>Shorthand works too</p>
+                )
+            })
+        }, (err) => {
+            console.log(err);
+        })
+    };
     return (
 
         <Container
@@ -70,20 +98,35 @@ const Login = () => {
                         </Row>
                         <Row className="mb-5">
 
-                            <Form>
+                            <Form onSubmit={handleSubmit(onSubmit)}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <FloatingLabel controlId="account" label="帳號" className="mb-3">
-                                        <Form.Control type="email" name="account" className="input-custom" placeholder="name@example.com" defaultValue={name}/>
+                                        <Form.Control
+                                            type="text"
+                                            name="account"
+                                            className="input-custom"
+                                            placeholder="name@example.com"
+                                            defaultValue={name}
+                                            {...register("account")}/>
                                     </FloatingLabel>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <FloatingLabel controlId="password" label="密碼">
-                                        <Form.Control type="password" name="password" className="input-custom" placeholder="密碼"/>
+                                        <Form.Control
+                                            type="password"
+                                            name="password"
+                                            className="input-custom"
+                                            placeholder="密碼"
+                                            {...register("password")}/>
                                     </FloatingLabel>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="rememberMe">
-                                    <Form.Check type="checkbox" label="記住我" className="input-custom" onChange={() =>handleChange()}/>
+                                    <Form.Check
+                                        type="checkbox"
+                                        label="記住我"
+                                        className="input-custom"
+                                        onChange={() => handleChange()}/>
                                 </Form.Group>
                                 <Button
                                     className="w-100 bg-orange btn-outline-orange fw-bold"
