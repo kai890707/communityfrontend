@@ -20,7 +20,31 @@ import {
     useLocation,
     useParams
 } from "react-router-dom";
+import { getApi } from '../../Api/Api';
+import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,tokenGetApi} from '../../Api/Api';
+import {tokenExpired} from '../../Api/Utils';
+import Swal from 'sweetalert2';
 const Layout = () => {
+    const [list,setList]=useState('');
+    const history = useHistory();
+    useEffect(()=>{
+        getListData();
+        function getListData() {
+            tokenGetApi('announcement/list').then(
+                (res)=>{
+                    if(res.status === 1){
+                        console.log(res);
+                        setList(res);
+                    }else if(res.status ===2){
+                        tokenExpired(res,'login');
+                    }
+                },(err)=>{
+        
+                }
+            )
+          }
+    },[]);
+    
     return (
         <Container fluid>
             <Row>

@@ -24,6 +24,7 @@ import {
     useLocation,
     useParams
 } from "react-router-dom";
+
 import { FilePond, registerPlugin } from 'react-filepond';
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css';
@@ -119,7 +120,7 @@ const Layout = () => {
                                                 maxFiles={1}
                                                 server="/api"
                                                 name="inputGroup-communityImages"
-                                                labelIdle='<span class="filepond--label-action">選擇一張代表社區的圖片</span>'
+                                                labelIdle='<span className="filepond--label-action">選擇一張代表社區的圖片</span>'
                                         />
                                     </Col>
                                 </Row>

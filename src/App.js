@@ -9,6 +9,7 @@ import {
   useLocation,
     useParams
 } from "react-router-dom";
+// import {AuthContext} from './Api/Api';
 import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
 import Routes from './Routes/Routes'
 import NoMatch from './404/Layout';
@@ -191,8 +192,8 @@ const test = [
 //     />
 //   );
 // }
+
 function RouteWithSubRoutes(route) {
-            // console.log(route.path+"_"+route.exact);
   return (
       <Route
         path={route.path}
@@ -201,65 +202,31 @@ function RouteWithSubRoutes(route) {
       </Route>
   );
 }
-const No = () => {
-    const { pathname } = useLocation()
-    return (
-            <h3>No match for <code>{pathname}</code></h3>
-    )
-}
-// const A = () => <h2>Home</h2>
-// const C = () => <h2>post</h2>
-// const B = ({ routes }) => {
-//   return (
-//     <div>
-//       社區
-//        {
-//         routes.map((route, i) => {
-  
-//           return <RouteWithSubRoutes key={route.path} {...route}   />
-    
-//         })
-//         }
-//     </div>
-//   );
-// }
-// const D =() =>{
-//   // The <Route> that rendered this component has a
-//   // path of `/topics/:topicId`. The `:topicId` portion
-//   // of the URL indicates a placeholder that we can
-//   // get from `useParams()`.
-//   let { topicId } = useParams();
-
-//   return (
-//     <div>
-//       <h3>{topicId}</h3>
-//     </div>
-//   );
-// }
-
 const App=() =>{
+  // const [user, setUser] = useState(null);
   return (
-    <Router >
+    // <AuthContext.Provider value={{user, setUser}}>
+      <Router >
+      
+          <Switch>
+          {
+            Routes.map((route, i) => {
+            //     return (
+            //       <Route
+            //       key={route.path}
+            //       path={route.path}
+            //       exact={route.exact}>
+            //       <route.component routes={route.routes} />
+            //     </Route>
+            // );
+              console.log(route);
+              return <RouteWithSubRoutes key={route.path} {...route}   />
     
-      <Switch>
-      {
-        Routes.map((route, i) => {
-        //     return (
-        //       <Route
-        //       key={route.path}
-        //       path={route.path}
-        //       exact={route.exact}>
-        //       <route.component routes={route.routes} />
-        //     </Route>
-        // );
-          console.log(route);
-          return <RouteWithSubRoutes key={route.path} {...route}   />
- 
-        })
-        }
-  </Switch>
-    </Router>
- 
+            })
+            }
+        </Switch> 
+      </Router>
+    // </AuthContext.Provider>
   );
 }
 export default App;

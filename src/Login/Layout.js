@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,useContext} from 'react';
 import {
     Container,
     Row,
@@ -8,15 +8,20 @@ import {
     Button
 } from 'react-bootstrap';
 import {useForm} from "react-hook-form";
-import {getApi, postApi} from '../Api/Api';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { useHistory } from "react-router-dom";
+import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe} from '../Api/Api';
+import Swal from 'sweetalert2';
+
 import './Login.scss';
+
 const Login = () => {
     const style = {
         height: '100vh',
         backgroundColor: '#FFC074'
     }
+    /**
+     * [將勾選記住我的帳號儲存在localStorage]
+     */
     function getStorageValue(key, defaultValue) {
         // getting stored value
         if (typeof window !== "undefined") {
@@ -27,13 +32,11 @@ const Login = () => {
             return initial;
         }
     }
-
     const useLocalStorage = (key, defaultValue) => {
         const [value,
             setValue] = useState(() => {
             return getStorageValue(key, defaultValue);
         });
-
         useEffect(() => {
             // storing input name
             localStorage.setItem(key, JSON.stringify(value));
@@ -52,31 +55,48 @@ const Login = () => {
         }
 
     }
-    const MySwal = withReactContent(Swal);
+    /** end */
+    
+    /**
+     * [登入api邏輯]
+     */
     const {register, handleSubmit, watch} = useForm();
-    console.log(watch("example"));
+    const history = useHistory();
     const onSubmit = data => {
-        postApi('login', data).then((res) => {
-            console.log(res);
-
-            localStorage.setItem('token', res.access_token)
-            MySwal.fire({
-                title: <p>Hello World</p>,
-                footer: 'Copyright 2018',
-                didOpen: () => {
-                    // `MySwal` is a subclass of `Swal`   with all the same instance & static
-                    // methods
-                    MySwal.clickConfirm()
-                }
-            }).then(() => {
-                return MySwal.fire(
-                    <p>Shorthand works too</p>
-                )
-            })
+        postApi('auth/login', data).then((res) => {
+            if(res.success){
+                setAuthToken(res.token);
+                getMe().then((res)=>{
+                    if(res.success){
+                         Swal.fire({
+                            title: '登入成功',
+                            text: '即將為您導向後台',
+                            icon: 'success',
+                        }).then((result)=>{
+                            if(result){
+                                history.push("/backend");
+                            }
+                        })
+                        setTimeout(()=>{
+                            history.push("/backend");
+                        },2000)
+                    }else{
+                        setAuthToken(null);
+                    }
+                })
+            }else{
+                Swal.fire({
+                    title: '登入失敗',
+                    text: '可能是帳號或密碼錯誤，非上述情況請聯絡系統管理員',
+                    icon: 'error',
+                  })
+            }
+            
         }, (err) => {
             console.log(err);
         })
     };
+    /**end */
     return (
 
         <Container
@@ -136,16 +156,8 @@ const Login = () => {
                                 </Button>
                             </Form>
                         </Row>
-                        {/* <Row
-                            className="text-center text-dark d-flex justify-content-center align-items-center m-4">
-                            <a className="register" href="/register">前往建立帳號<i className="fas fa-long-arrow-alt-right ms-2"></i>
-                            </a>
-
-                        </Row> */}
                     </Col>
-
                 </Row>
-
             </Container>
         </Container>
 
