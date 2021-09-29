@@ -37,7 +37,7 @@ import { EditorState, convertToRaw,convertFromRaw  } from "draft-js";
 import { stateToHTML } from 'draft-js-export-html';
 import draftToHtml from "draftjs-to-html";
 import {postApi,setAuthToken,getAuthToken,tokenApi,getMe,tokenGetApi,tokenPostApi} from '../../Api/Api';
-import {tokenExpired} from '../../Api/Utils';
+import {tokenExpired,CustomSuccessAlert,CustomErrorAlert} from '../../Api/Utils';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview,FilePondPluginFileValidateType);
@@ -70,17 +70,21 @@ const Layout = () => {
         // console.log('12', draftToHtml(convertToRaw(editorState.getCurrentContent())))
       }
     // console.log(CarouselImage[0].file);
-    // function CustomEditor(){
-    //     return(
-    //         <Editor
-    //             wrapperClassName="demo-wrapper"
-    //             editorClassName="demo-editor"
-    //                 toolbar={{
-    //             options: ['inline', 'blockTypes', 'fontSize', 'list', 'textAlign', 'history']
-    //             }}
-    //         />
-    //     )
-    //   }  
+    function CustomEditor(){
+        return(
+            <Editor
+                name="content"
+                    editorState={description}
+                    toolbarClassName="toolbarClassName"
+                    wrapperClassName="wrapperClassName"
+                    editorClassName="editorClassName"
+                    onEditorStateChange={setEditorState}
+                toolbar={{
+                options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
+                }}
+            />
+        )
+      }  
   
     const {
         register,
@@ -102,20 +106,29 @@ const Layout = () => {
             })
             
             /**儲存完整HTML */
-            console.log(convertToRaw(description.getCurrentContent()));
+            // console.log(convertToRaw(description.getCurrentContent()));
             formData.append('content',JSON.stringify(convertToRaw(description.getCurrentContent())));
         console.log(formData);
         tokenPostApi('announcement/add',formData).then(
             (res)=>{
                 if(res.status === 1){
-                    console.log(res);
-                }else if(res.status ===2){
+                    CustomSuccessAlert("文章新增成功").then((result)=>{
+                        if(result){
+                            window.location.reload();
+                        }   
+                    });
+                }else if(res.status === 0){
+                    CustomErrorAlert("文章新增失敗");
+                }
+                else if(res.status ===2){
                     tokenExpired(res,'login');
+                }else if(res.status ===3){
+                    CustomErrorAlert(res.message);
                 }else{
-                    console.log(res);
+                    CustomErrorAlert("未知錯誤，請聯絡管理員");
                 }
             },(err)=>{
-    
+                CustomErrorAlert("未知錯誤，請聯絡管理員");
             }
         )
       };
@@ -132,33 +145,16 @@ const Layout = () => {
             <Row className="border-bottom p-3">
                 <h2 className="fw-bold">新增公告</h2>
             </Row>
-          
             <Form onSubmit={handleSubmitOnClick} id="post-form" encType="multipart/form-data" method="post">
                 <Row className="mt-4">
                     <Col md={10} xs={12} className="order-xs-2">
-    
                         <Row>
                             <InputGroup size="lg">
                                 <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" name="title"  placeholder="新增公告標題" {...register("title")}/>
                             </InputGroup>
-                            {/* <MyComponent /> */}
                         </Row>
-
                         <Row className="w-100 mt-2" style={{display:"inline-block"}}>
-                        
-                        <Editor
-                            name="content"
-                             editorState={description}
-                             toolbarClassName="toolbarClassName"
-                             wrapperClassName="wrapperClassName"
-                             editorClassName="editorClassName"
-                             onEditorStateChange={setEditorState}
-                                toolbar={{
-                            options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
-                            
-                            }}
-                            
-                        />
+                        <CustomEditor />
                    
                         </Row>
                         <Row className="mt-2">

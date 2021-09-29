@@ -9,6 +9,25 @@ export function tokenExpired(res,href) {
         setTimeout(()=>{
             window.location.href=href;
             setAuthToken("");
-        },2000)
+        },1500)
       })
   }
+export function CustomSuccessAlert(message) {
+  return (
+    Swal.fire({
+      title: '操作成功',
+      text: message,
+      icon: 'success',
+    })
+  )
+
+  }
+export function CustomErrorAlert(message) {
+  return(
+    Swal.fire({
+      title: '操作失敗',
+      text: message,
+      icon: 'error',
+    })
+  )
+}
