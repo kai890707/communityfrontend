@@ -11,6 +11,8 @@
     "draft-js-export-html": "^1.4.1",
     "draftjs-to-html": "^0.9.1",
     "filepond": "^4.29.1",
+    "filepond-plugin-file-encode": "^2.1.10",
+    "filepond-plugin-file-poster": "^2.4.4",
     "filepond-plugin-file-validate-type": "^1.2.6",
     "filepond-plugin-image-exif-orientation": "^1.0.11",
     "filepond-plugin-image-preview": "^4.6.10",

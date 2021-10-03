@@ -11,9 +11,14 @@ import NoMatch from '../404/Layout';
 import Login from '../Login/Layout';
 import Backend from '../Backend/Layout';
 import Config from '../Backend/Pages/Config'; 
-import AnnouncementList from '../Backend/Pages/AnnouncementList';
-import AddAnnouncement from '../Backend/Pages/AddAnnouncement';
+import AnnouncementList from '../Backend/Pages/Announcement/AnnouncementList';
+import AddAnnouncement from '../Backend/Pages/Announcement/AddAnnouncement';
 import AccountConfig from '../Backend/Pages/AccountConfig';
+import EditAnnouncement from '../Backend/Pages/Announcement/EditAnnouncement';
+import FeatureList from '../Backend/Pages/Feature/FeatureList';
+import AttractionsList from '../Backend/Pages/Attractions/AttractionsList';
+import SpecialtyList from '../Backend/Pages/Specialty/SpecialtyList';
+import AddPagePost from '../Backend/Pages/AddPagePost';
 const routes = [
     {
         path: '/',
@@ -44,8 +49,27 @@ const routes = [
                 path: '/accountConfig',
                 exact: true,
                 component: AccountConfig
-            }, 
-            
+            }, {
+                path:'/editAnnouncement/:pageId',
+                exact: true,
+                component: EditAnnouncement
+            },{
+                path:'/featureList',
+                exact: true,
+                component: FeatureList
+            },{
+                path:'/attractionsList',
+                exact: true,
+                component: AttractionsList
+            },{
+                path:'/specialtyList',
+                exact: true,
+                component: SpecialtyList
+            },{
+                path:'/addPagePost',
+                exact: true,
+                component: AddPagePost
+            }
         ]
     }, {
         path: '/保社社區',

@@ -23,6 +23,7 @@ import {
 } from "react-router-dom";
 import './Layout.scss';
 import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe} from '../Api/Api';
+import Swal from 'sweetalert2';
 const Layout = () => {
     const [openArticle,
         setOpenArticle] = useState(false);
@@ -31,10 +32,21 @@ const Layout = () => {
     const history = useHistory();
     const location = useLocation();
     const handleLogout = () => {
-            setAuthToken("");
-            // if (location.pathname !== "/") {
-              history.push("/");
-            // }
+        Swal.fire({
+            title: '系統詢問',
+            text: "您確定要登出嗎?",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '登出',
+            cancelButtonText: '取消'
+          }).then((res)=>{
+            if(res.isConfirmed){
+                setAuthToken("");
+                history.push("/");
+            }
+          })
           };
     return (
         <div className="col-auto col-md-1 col-xl-1 px-sm-2 px-0 sidebar-bg-color shadow-sm">
@@ -69,13 +81,13 @@ const Layout = () => {
                             <div id="example-collapse-article">
                                 <ul className=" nav flex-column ms-1 " id="submenu1" data-bs-parent="#menu">
                                     <li className="w-100 ">
-                                        <Link to="announcementList" className="nav-link px-0 option-text"  title="社區公告列表">
+                                        <Link to="/announcementList" className="nav-link px-0 option-text"  title="社區公告列表">
                                             <i className="fas fa-list-ul sidebar-suboption-fs"></i>
                                             <span className="d-none d-sm-inline sidebar-suboption-fs ms-2">公告列表</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="addAnnouncement" className="nav-link px-0 option-text" title="新增社區公告">
+                                        <Link to="/addAnnouncement" className="nav-link px-0 option-text" title="新增社區公告">
                                             <i className="fas fa-plus-circle sidebar-suboption-fs"></i>
                                             <span className="d-none d-sm-inline sidebar-suboption-fs ms-2">新增公告</span>
                                         </Link>
@@ -100,22 +112,28 @@ const Layout = () => {
                             <div id="example-collapse-text">
                                 <ul className=" nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <li className="w-100">
-                                        <a href="#" className="nav-link px-0 option-text"  title="地方特色頁面管理">
+                                        <Link to="/featureList" className="nav-link px-0 option-text"  title="地方特色頁面管理">
                                             <i className="far fa-lightbulb fs-6"></i>
                                             <span className="sidebar-suboption-fs d-none d-sm-inline ms-2">地方特色</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="w-100">
-                                        <a href="#" className="nav-link px-0 option-text"  title="地方特產文章管理">
+                                        <Link to="/specialtyList" className="nav-link px-0 option-text"  title="地方特產文章管理">
                                             <i className="far fa-apple-crate sidebar-suboption-fs"></i>
                                             <span className="sidebar-suboption-fs d-none d-sm-inline  ms-2">地方特產</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="w-100">
-                                        <a href="#" className="nav-link px-0 option-text"  title="地方景點文章管理">
+                                        <Link to="/attractionsList" className="nav-link px-0 option-text"  title="地方景點文章管理">
                                             <i className="fas fa-map-marker-alt sidebar-suboption-fs"></i>
                                             <span className=" sidebar-suboption-fs d-none d-sm-inline ms-2">地方景點</span>
-                                        </a>
+                                        </Link>
+                                    </li>
+                                    <li className="w-100">
+                                        <Link to="/addPagePost" className="nav-link px-0 option-text"  title="新增頁面文章">
+                                            <i className="fas fa-map-marker-alt sidebar-suboption-fs"></i>
+                                            <span className=" sidebar-suboption-fs d-none d-sm-inline ms-2">新增頁面文章</span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -129,25 +147,19 @@ const Layout = () => {
                         </Link>
                     </li>
                      <li className=" mt-2 mb-2 ">
-                        <Link to="accountConfig" className="nav-link px-0 align-middle option-text" title="帳號設定">
+                        <Link to="/accountConfig" className="nav-link px-0 align-middle option-text" title="帳號設定">
                             <i className="fs-6  fas fa-cogs"></i>
                             <span className="fs-6  ms-2 d-none d-sm-inline">帳號設定</span>
                         </Link>
                     </li>
                     <li className=" mt-2 mb-2 ">
-                        <Link to="" onClick={handleLogout} className="nav-link px-0 align-middle option-text" title="登出">
+                        <button onClick={handleLogout} className="nav-link px-0 align-middle option-text" title="登出">
                             <i className="fs-6  fas fa-sign-out-alt"></i>
                             <span className="fs-6  ms-2 d-none d-sm-inline">登出</span>
-                    </Link>
+                    </button>
                     </li>
                 </ul>
                 <hr/>
-                {/* <div className="w-100 d-flex justify-content-center">
-                     <Link to="" className="nav-link px-0 align-middle option-text" title="登出">
-                            <i className="fs-4  fas fa-sign-out-alt"></i>
-                            <span className="fs-4  ms-2 d-none d-sm-inline">登出</span>
-                    </Link>
-                </div> */}
             </div>
         </div>
       
