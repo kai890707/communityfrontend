@@ -4,7 +4,7 @@ import './Banner.scss';
 import { Container, Image,Row,Col } from 'react-bootstrap';
 const Layout = () => {
     const theme = useContext(Content);
-    const BannerData = theme.pageName.Banner;
+    const BannerData = theme.pageData.Banner;
     // console.log("main", BannerData);
     const bgi = {
         backgroundImage: `url(${BannerData.data.image})` 

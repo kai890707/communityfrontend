@@ -13,7 +13,8 @@ import {
 } from "react-router-dom";
 const Layout = (props) => {
     const theme = useContext(Content);
-    const NavData = theme.pageName.Nav.data;
+    const NavData = theme.pageData.Nav.data;
+    console.log('n',NavData);
     // console.log(theme.history.location.pathname);
     return (
         <Navbar bg="white" expand="lg" className="pt-4 pb-4 nav">
@@ -24,6 +25,7 @@ const Layout = (props) => {
                     <Nav className="ms-auto ">
                         {
                             NavData.list.map((list,index) => {
+                               
                                return <Nav.Link href={list.path} key={index} className="nav-text fs-5 fw-bold">{list.name}</Nav.Link>
                             })
                         }

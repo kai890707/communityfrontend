@@ -6,9 +6,9 @@ import './Main.scss';
 // 
 const Layout = () => {
     const theme = useContext(Content);
-    const MainData = theme.pageName.Main;
-    const News = theme.pageName.Main.data.news;
-    const aboutUs = theme.pageName.Main.data.aboutUs;
+    const MainData = theme.pageData.Main;
+    const News = theme.pageData.Main.data.news;
+    const aboutUs = theme.pageData.Main.data.aboutUs;
     console.log("main",News);
     return (
         <>

@@ -20,11 +20,12 @@ import AttractionsList from '../Backend/Pages/Attractions/AttractionsList';
 import SpecialtyList from '../Backend/Pages/Specialty/SpecialtyList';
 import AddPagePost from '../Backend/Pages/AddPagePost';
 const routes = [
+    // {
+    //     path: '/',
+    //     exact: true,
+    //     component: Home
+    // }, 
     {
-        path: '/',
-        exact: true,
-        component: Home
-    }, {
         path: '/login',
         exact: true,
         component: Login
@@ -72,35 +73,35 @@ const routes = [
             }
         ]
     }, {
-        path: '/保社社區',
+        path: '/',
         exact: true,
         component: Template
     }, {
-        path: '/保社社區/社區特色',
+        path: '/社區特色',
         exact: true,
         component: Feature
     }, {
-        path: '/保社社區/社區公告',
+        path: '/社區公告',
         exact: true,
         component: News
     }, {
-        path: '/保社社區/社區公告/:topicId',
+        path: '/社區公告/:topicId',
         exact: true,
         component: NewsDetail
     }, {
-        path: '/保社社區/社區景點',
+        path: '/社區景點',
         exact: true,
         component: Attractions
     }, {
-        path: '/保社社區/社區景點/:topicId',
+        path: '/社區景點/:topicId',
         exact: true,
         component: AttractionsDetail
     }, {
-        path: '/保社社區/社區特產',
+        path: '/社區特產',
         exact: true,
         component: Specialty
     }, {
-        path: '/保社社區/社區特產/:topicId',
+        path: '/社區特產/:topicId',
         exact: true,
         component: SpecialtyDetail
     }, {

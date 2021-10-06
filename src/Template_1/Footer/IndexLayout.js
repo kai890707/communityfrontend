@@ -3,7 +3,7 @@ import {Content} from '../Layout';
 import './Footer.scss';
 const Layout = () => {
     const theme = useContext(Content);
-    const FooterData = theme.pageName.Footer.data;
+    const FooterData = theme.pageData.Footer.data;
     const contact = FooterData.contact; 
      const aboutUs = FooterData.aboutUs;
 

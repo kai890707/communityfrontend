@@ -115,6 +115,12 @@ export const setAuthToken = (token) => {
 export const getAuthToken = () => {
   return localStorage.getItem(TOKEN_NAME);
 };
+export const setLocalStorage=(k,v)=>{
+    localStorage.setItem(k, v);
+}
+export const getLocalStorage = (k) => {
+    return localStorage.getItem(k);
+  };
 /**
  * []
  */

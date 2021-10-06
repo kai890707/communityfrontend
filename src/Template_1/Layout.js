@@ -1,35 +1,46 @@
-import React, {useState, createContext} from 'react';
+import React, {useState, createContext,useEffect} from 'react';
 import Nav from './Nav/IndexLayout';
 import Main from './Main/IndexLayout';
 import Banner from './Banner/IndexLayout';
 import Footer from './Footer/IndexLayout';
 import Error from '../404/Layout';
+import {getApi,postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,tokenGetApi} from '../Api/Api';
 import './index.scss'
 const a = "123"
 export const Content = createContext();
 const Template = (props) => {
+    function getIndexData() {
+        getApi('page/getIndexData').then((res)=>{
+            console.log('res',res);
+            console.log("data",data);
+        })
+    }
+    useEffect(()=>{
+        getIndexData();
+    },[]);
     const data = {
         name: "保社社區",
-        pageName: {
+        pageData: {
             Nav: {
                 data: {
                     title: "保社社區",
                     list: [
                         {
                             name: "首頁",
-                            path: "/保社社區"
+                            path: "/",
+
                         }, {
                             name: "社區特色",
-                            path: "/保社社區/社區特色"
+                            path: "/社區特色"
                         }, {
                             name: "社區公告",
-                            path: "/保社社區/社區公告"
+                            path: "/社區公告"
                         }, {
                             name: "社區景點",
-                            path: "/保社社區/社區景點"
+                            path: "/社區景點"
                         }, {
                             name: "社區特產",
-                            path: "/保社社區/社區特產"
+                            path: "/社區特產"
                         }
                     ]
                 }

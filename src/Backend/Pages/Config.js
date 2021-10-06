@@ -224,7 +224,7 @@ const Layout = () => {
                     </Tab>
                     <Tab eventKey="profile" title="首頁設定">
                         <Row className="bg-white p-4">
-                            asd
+                            
                         </Row>
                     </Tab>
                 </Tabs>

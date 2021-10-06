@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap';
 import {useForm} from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe} from '../Api/Api';
+import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,setLocalStorage} from '../Api/Api';
 import Swal from 'sweetalert2';
 
 import './Login.scss';
@@ -66,6 +66,7 @@ const Login = () => {
         postApi('auth/login', data).then((res) => {
             if(res.success){
                 setAuthToken(res.token);
+                setLocalStorage('p',res.permission);
                 getMe().then((res)=>{
                     if(res.success){
                          Swal.fire({

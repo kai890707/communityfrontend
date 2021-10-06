@@ -22,7 +22,7 @@ import {
     useParams
 } from "react-router-dom";
 import './Layout.scss';
-import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe} from '../Api/Api';
+import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,setLocalStorage,getLocalStorage} from '../Api/Api';
 import Swal from 'sweetalert2';
 const Layout = () => {
     const [openArticle,
@@ -44,10 +44,15 @@ const Layout = () => {
           }).then((res)=>{
             if(res.isConfirmed){
                 setAuthToken("");
+                setLocalStorage('p',"");
                 history.push("/");
             }
           })
           };
+
+        useEffect(()=>{
+
+        },[]);
     return (
         <div className="col-auto col-md-1 col-xl-1 px-sm-2 px-0 sidebar-bg-color shadow-sm">
          
@@ -139,19 +144,25 @@ const Layout = () => {
                             </div>
                         </Collapse>
                     </li>
-
-                    <li className=" mt-2 mb-2 ">
-                        <Link to="/config" className="nav-link px-0 align-middle option-text"  title="網站設定">
-                            <i className="fs-6 far fa-browser"></i>
-                            <span className="fs-6 ms-2 d-none d-sm-inline">網站設定</span>
-                        </Link>
-                    </li>
-                     <li className=" mt-2 mb-2 ">
-                        <Link to="/accountConfig" className="nav-link px-0 align-middle option-text" title="帳號設定">
-                            <i className="fs-6  fas fa-cogs"></i>
-                            <span className="fs-6  ms-2 d-none d-sm-inline">帳號設定</span>
-                        </Link>
-                    </li>
+                    {
+                        (getLocalStorage('p') === "admin" || getLocalStorage('p') === "root")?(
+                            <>
+                            <li className=" mt-2 mb-2 ">
+                                <Link to="/config" className="nav-link px-0 align-middle option-text"  title="網站設定">
+                                    <i className="fs-6 far fa-browser"></i>
+                                    <span className="fs-6 ms-2 d-none d-sm-inline">網站設定</span>
+                                </Link>
+                            </li>
+                            <li className=" mt-2 mb-2 ">
+                                <Link to="/accountConfig" className="nav-link px-0 align-middle option-text" title="帳號設定">
+                                    <i className="fs-6  fas fa-cogs"></i>
+                                    <span className="fs-6  ms-2 d-none d-sm-inline">帳號設定</span>
+                                </Link>
+                            </li>
+                            </>
+                        ):(<div></div>)
+                    }
+                    
                     <li className=" mt-2 mb-2 ">
                         <button onClick={handleLogout} className="nav-link px-0 align-middle option-text" title="登出">
                             <i className="fs-6  fas fa-sign-out-alt"></i>

@@ -99,8 +99,7 @@ const Layout = () => {
         /** 文章多圖片*/
         CarouselImage.map((file)=>{
             formData.append("carousel[]",file.file);
-        })
-            
+        })     
         /**儲存完整HTML */
         // console.log(convertToRaw(description.getCurrentContent()));
         formData.append('content',JSON.stringify(convertToRaw(description.getCurrentContent())));
@@ -218,7 +217,6 @@ const Layout = () => {
                                     onupdatefiles={setFiles}
                                     maxFiles={1}
                                     labelIdle='<span className="filepond--label-action">選擇精選圖片</span>'
-                                    
                                     // onprocessfile={(error, file) => {
                                     //     console.log("id", file.id)
                                     //     console.log("server id", file.serverId)

@@ -14,19 +14,19 @@ const Attractions = () => {
                     list: [
                         {
                             name: "首頁",
-                            path: "/保社社區"
+                            path: "/"
                         }, {
                             name: "社區特色",
-                            path: "/保社社區/社區特色"
+                            path: "/社區特色"
                         }, {
                             name: "社區公告",
-                            path: "/保社社區/社區公告"
+                            path: "/社區公告"
                         }, {
                             name: "社區景點",
-                            path: "/保社社區/社區景點"
+                            path: "/社區景點"
                         }, {
                             name: "社區特產",
-                            path: "/保社社區/社區特產"
+                            path: "/社區特產"
                         }
                     ]
                 }
