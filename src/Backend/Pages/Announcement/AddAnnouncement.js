@@ -1,30 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
     Container,
     Row,
     Col,
-    FloatingLabel,
     Form,
     Button,
-    Collapse,
-    Nav,
+  
     InputGroup,
     FormControl,
     Card
 } from 'react-bootstrap';
-import {
-    BrowserRouter as Router,
-    HashRouter,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation,
-    useParams
-} from "react-router-dom";
-import CustomEditor from "../Editor";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FilePond, registerPlugin } from 'react-filepond';
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css';
@@ -32,9 +18,7 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw,convertFromRaw  } from "draft-js";
-import { stateToHTML } from 'draft-js-export-html';
-import draftToHtml from "draftjs-to-html";
+import { EditorState, convertToRaw  } from "draft-js";
 import {postApi,setAuthToken,getAuthToken,tokenApi,getMe,tokenGetApi,tokenPostApi} from './../../../Api/Api';
 import {tokenExpired,CustomSuccessAlert,CustomErrorAlert} from './../../../Api/Utils';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
@@ -157,21 +141,8 @@ const Layout = () => {
                                     files={CarouselImage}
                                     onupdatefiles={setCarouselImage}
                                     allowMultiple={true}
-                                    // acceptedFileTypes={['image/*']}
                                     maxFiles={6}
-                                    // name="files"
                                     labelIdle='<span className="filepond--label-action">選擇文章圖片(上限為6張)</span>'
-                                   
-                                    // onprocessfile={(error, file) => {
-                                    //     console.log("id", file.id)
-                                    //     console.log("server id", file.serverId)
-                                    //     console.log("origin", file.origin)
-                                    //     console.log("file", file.file)
-                                    //     console.log("fileExtension", file.fileExtension)
-                                    //     console.log("fileSize", file.fileSize)
-                                    //     console.log("filename", file.filename)
-                                    //     console.log("filenameWithoutExtension", file.filenameWithoutExtension)
-                                    // }}
                             />
                         </Row>
                     </Col>
@@ -179,15 +150,7 @@ const Layout = () => {
                         <Card className="mb-2">
                             <Card.Header>發佈</Card.Header>
                             <Card.Body>
-                                {/* <Row className="mb-2">
-                                    <Col><span>狀態</span></Col>
-                                    <Col>
-                                        <Form.Select size="sm"   {...register("carouselImage")}>
-                                            <option>草稿</option>
-                                            <option>已發布</option>
-                                        </Form.Select>
-                                    </Col>
-                                </Row> */}
+                             
                                 <Row className="mb-2">
                                     <Col><span>可見度</span></Col>
                                     <Col>
@@ -213,20 +176,9 @@ const Layout = () => {
                                 </Card.Text>
                                 <FilePond
                                     files={files}
-                                    // acceptedFileTypes={['image/*']}
                                     onupdatefiles={setFiles}
                                     maxFiles={1}
                                     labelIdle='<span className="filepond--label-action">選擇精選圖片</span>'
-                                    // onprocessfile={(error, file) => {
-                                    //     console.log("id", file.id)
-                                    //     console.log("server id", file.serverId)
-                                    //     console.log("origin", file.origin)
-                                    //     console.log("file", file.file)
-                                    //     console.log("fileExtension", file.fileExtension)
-                                    //     console.log("fileSize", file.fileSize)
-                                    //     console.log("filename", file.filename)
-                                    //     console.log("filenameWithoutExtension", file.filenameWithoutExtension)
-                                    // }}
                                 />
                             </Card.Body>
                         </Card>

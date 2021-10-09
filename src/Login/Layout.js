@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Container,
     Row,
@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap';
 import {useForm} from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,setLocalStorage} from '../Api/Api';
+import {postApi,setAuthToken,getMe,setLocalStorage} from '../Api/Api';
 import Swal from 'sweetalert2';
 
 import './Login.scss';

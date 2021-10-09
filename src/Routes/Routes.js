@@ -6,6 +6,7 @@ import Attractions from '../Template_1/Pages/Attractions';
 import AttractionsDetail from '../Template_1/Pages/AttractionsDetail';
 import Specialty from '../Template_1/Pages/Specialty';
 import SpecialtyDetail from '../Template_1/Pages/SpecialtyDetail';
+import FeatureDetail from '../Template_1/Pages/FeatureDetail';
 import Feature from '../Template_1/Pages/Feature';
 import NoMatch from '../404/Layout';
 import Login from '../Login/Layout';
@@ -14,6 +15,7 @@ import Config from '../Backend/Pages/Config';
 import AnnouncementList from '../Backend/Pages/Announcement/AnnouncementList';
 import AddAnnouncement from '../Backend/Pages/Announcement/AddAnnouncement';
 import AccountConfig from '../Backend/Pages/AccountConfig';
+import BackendIndex from '../Backend/Pages/Index';
 import EditAnnouncement from '../Backend/Pages/Announcement/EditAnnouncement';
 import FeatureList from '../Backend/Pages/Feature/FeatureList';
 import AttractionsList from '../Backend/Pages/Attractions/AttractionsList';
@@ -34,6 +36,11 @@ const routes = [
         exact: true,
         component: Backend,
         routes: [
+            {
+                path: '/',
+                exact: true,
+                component: BackendIndex
+            },
             {
                 path: '/config',
                 exact: true,
@@ -80,6 +87,11 @@ const routes = [
         path: '/社區特色',
         exact: true,
         component: Feature
+    },
+    {
+        path: '/社區特色/:topicId',
+        exact: true,
+        component: FeatureDetail
     }, {
         path: '/社區公告',
         exact: true,

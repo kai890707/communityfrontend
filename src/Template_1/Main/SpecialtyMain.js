@@ -1,29 +1,15 @@
 import {
     Navbar,
     Container,
-    NavDropdown,
-    Nav,
     Row,
     Col
 } from 'react-bootstrap';
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import './Main.scss';
-
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 const Layout = ({data}) => {
-    // const theme = useContext(Content);
     const MainData = data.data;
-    const news = data.data.specialty;
-    // console.log(theme.history.location.pathname);
+    const news = data.data.news;
     const [newsData,
         setNewsData] = useState(news.slice(0, 50));
     const [pageNumber,
@@ -33,9 +19,12 @@ const Layout = ({data}) => {
     const displayNews = newsData
         .slice(pagesVisited, pagesVisited + usersPerPage)
         .map((news, i) => {
+             /**將原page content 物件提取內容成純文字 */
+             var blocks =  JSON.parse(news.page_content).blocks;
+             var value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
             return ((i % 2 == 0)
                 ? (
-                    <Row className="main-feature-row animate__animated animate__backInRight">
+                    <Row className="main-feature-row animate__animated animate__backInRight" key={news.id}>
                         <Col
                             md={{
                             span: 6,
@@ -49,8 +38,8 @@ const Layout = ({data}) => {
                             <Row className="p-5 main-news-content">
                                 <Col xs={12}>
                                     <div className="main-feature-text-content ">
-                                        <h2 className="text-center">{news.title}</h2>
-                                        <p>{news.content}</p>
+                                        <h2 className="text-center">{news.page_title}</h2>
+                                        <p>{value}</p>
                                     </div>
                                 </Col>
                                 <Col xs={12}>
@@ -75,13 +64,13 @@ const Layout = ({data}) => {
                         }}
                             className="d-flex justify-content-center align-items-center z-2 order-xs-1">
                             <figure className="main-feature-img">
-                                <img src={news.images} alt="" className="img-fluid"></img>
+                                <img src={news.page_chosen} alt="" className="img-fluid"></img>
                             </figure>
                         </Col>
                     </Row>
                 )
                 : (
-                    <Row className="main-feature-row animate__animated animate__backInLeft">
+                    <Row className="main-feature-row animate__animated animate__backInLeft"  key={news.id}>
                         <Col
                             md={{
                             span: 6,
@@ -93,7 +82,7 @@ const Layout = ({data}) => {
                         }}
                             className="d-flex justify-content-center align-items-center z-2 ">
                             <figure className="main-feature-img">
-                                <img src={news.images} alt="" className="img-fluid"></img>
+                                <img src={news.page_chosen} alt="" className="img-fluid"></img>
                             </figure>
                         </Col>
                         <Col
@@ -109,8 +98,8 @@ const Layout = ({data}) => {
                             <Row className="p-5 main-news-content">
                                 <Col xs={12}>
                                     <div className="main-feature-text-content ">
-                                        <h2 className="text-center">{news.title}</h2>
-                                        <p>{news.content}</p>
+                                        <h2 className="text-center">{news.page_title}</h2>
+                                        <p>{value}</p>
                                     </div>
                                 </Col>
                                 <Col xs={12}>

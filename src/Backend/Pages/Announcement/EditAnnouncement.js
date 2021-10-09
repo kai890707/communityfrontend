@@ -25,7 +25,7 @@ import {
     useParams
 } from "react-router-dom";
 import CustomEditor from "../Editor";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FilePond, registerPlugin } from 'react-filepond';
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css';
@@ -37,14 +37,11 @@ import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
 
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw,convertFromRaw  } from "draft-js";
-import { stateToHTML } from 'draft-js-export-html';
-import draftToHtml from "draftjs-to-html";
+
 import {getApi,postApi,setAuthToken,getAuthToken,tokenApi,getMe,tokenGetApi,tokenPostApi} from './../../../Api/Api';
 import {tokenExpired,CustomSuccessAlert,CustomErrorAlert} from './../../../Api/Utils';
 import Base from './../../../Api/Base';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-import Swal from 'sweetalert2';
-import { logDOM } from '@testing-library/react';
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview,FilePondPluginFileValidateType,FilePondPluginFilePoster);
 const Layout = () => {
@@ -133,14 +130,7 @@ const Layout = () => {
                     CustomErrorAlert("未知錯誤，請聯絡管理員");
                 }
             )
-      };
-    //   function createMarkup() {
-    //     return {__html: draftToHtml(convertToRaw(editorState.getCurrentContent()))};
-    //   }
-      
-    //   function MyComponent() {
-    //     return <div dangerouslySetInnerHTML={createMarkup()} />;
-    //   }
+      }
     const history = useHistory();
       useEffect(()=>{
         getEditById();

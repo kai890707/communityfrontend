@@ -1,30 +1,14 @@
-import React, {useState, useEffect,useContext} from 'react';
+import React from 'react';
+
 import {
-    Container,
-    Row,
-    Col,
-    FloatingLabel,
-    Form,
-    Button,
-    Collapse,
-    Nav
-} from 'react-bootstrap';
-import {
-    BrowserRouter as Router,
+ 
     HashRouter,
     Switch,
     Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation,
-    useParams
+ 
 } from "react-router-dom";
 import SideBar from './SideBarLayout';
-import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,tokenGetApi} from '../Api/Api';
-// import {tokenExpired} from '../Api/Utils';
-// import Config from './Pages/Config';
-// import {AuthContext} from '../Api/Api';
+import {getAuthToken} from '../Api/Api';
 import NotLogin from './Pages/NotLogin';
 const Backend = ({routes}) => {
     const Routes = routes;
@@ -35,7 +19,8 @@ const Backend = ({routes}) => {
             </Route>
         );
     }
-    
+
+ 
     return (
         /**
          * [判斷有無token進行頁面渲染]

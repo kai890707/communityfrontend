@@ -1,22 +1,14 @@
 
 
 
-import { Navbar, Container, NavDropdown, Nav,Row,Col } from 'react-bootstrap';
-import React, { useState, useContext } from 'react';
+import { Container,Row } from 'react-bootstrap';
+import React from 'react';
 import './Main.scss';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
 import { Carousel } from 'react-carousel-minimal';
+import { EditorState,convertFromRaw  } from "draft-js";
+import { Editor } from 'react-draft-wysiwyg';
 const Layout = ({ data }) => {
-    // const theme = useContext(Content);
-    const MainData = data.data;
+const MainData = data.data;
  const captionStyle = {
     fontSize: '2em',
     fontWeight: 'bold',
@@ -25,7 +17,6 @@ const Layout = ({ data }) => {
     fontSize: '20px',
     fontWeight: 'bold',
   }
-    console.log(MainData);
     return (
         <Container className="main-news-details">
            
@@ -34,19 +25,19 @@ const Layout = ({ data }) => {
                     padding: "0 20px"
                 }}>
                     {
-                        MainData.images.length === 1 ?
-                            (
-                                <figure className="main-news-img"
-                                    style={{
-                                        textAlign: "center",
-                                        maxWidth: "850px",
-                                        maxHeight: "500px",
-                                        margin: "40px auto",
-                                        display:"inline-table"
-                                    }}>
-                                    <img src={MainData.images[0].image} alt="" className="img-fluid"></img>
-                                </figure>
-                            )
+                        MainData.images.length <=1 ?
+                        (
+                            <figure className="main-news-img"
+                                style={{
+                                    textAlign: "center",
+                                    maxWidth: "850px",
+                                    maxHeight: "500px",
+                                    margin: "40px auto",
+                                    display:"inline-table"
+                                }}>
+                                <img src={MainData.images.length!==0?MainData.images[0].image:""} alt="" className="img-fluid"></img>
+                            </figure>
+                        )
                             :
                                 (<Carousel
                                     data={MainData.images}
@@ -80,12 +71,16 @@ const Layout = ({ data }) => {
                     </div>
             </Row>
             <Row className="news-detail-title">
-                <h2 className="display-5 fw-bold">{MainData.title}</h2>
+                <h2 className="display-5 fw-bold">{MainData.page_title}</h2>
             </Row>
             <hr />
             <Row className="news-detail-content mb-4 mt-4">
-                <p className="text-muted">簡介</p>
-                <p className="">{MainData.content}</p>
+                <Editor readOnly={true}
+                    editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(MainData.page_content)))}
+                    toolbar={{
+                        options: []
+                    }}
+                    toolbarClassName = "rmtoolbar" />
             </Row>
             
         </Container>

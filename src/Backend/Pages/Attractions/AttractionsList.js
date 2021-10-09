@@ -10,15 +10,7 @@ import {
     Nav
 } from 'react-bootstrap';
 import {
-    BrowserRouter as Router,
-    HashRouter,
-    Switch,
-    Route,
-    Link,
-    Redirect,
     useHistory,
-    useLocation,
-    useParams
 } from "react-router-dom";
 // import ReactPaginate from 'react-paginate';
 import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,tokenGetApi} from './../../../Api/Api';

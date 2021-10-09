@@ -1,21 +1,14 @@
 
 
 
-import { Navbar, Container, NavDropdown, Nav,Row,Col } from 'react-bootstrap';
-import React, { useState, useContext } from 'react';
+import { Container,Row } from 'react-bootstrap';
+import React from 'react';
 import './Main.scss';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
+
+import { EditorState,convertFromRaw  } from "draft-js";
+import { Editor } from 'react-draft-wysiwyg';
 import { Carousel } from 'react-carousel-minimal';
 const Layout = ({ data }) => {
-    // const theme = useContext(Content);
     const MainData = data.data;
     const captionStyle = {
         fontSize: '2em',
@@ -25,28 +18,33 @@ const Layout = ({ data }) => {
         fontSize: '20px',
         fontWeight: 'bold',
     }
-    console.log(MainData);
     return (
         <Container className="main-news-details">
             
             <Row className="news-detail-title">
-                <h2 className="display-5 fw-bold">{MainData.title}</h2>
+                <h2 className="display-5 fw-bold">{MainData.page_title}</h2>
             </Row>
             <Row className="news-detail-date-list text-muted">
                 <p className="m-0">
-                    <i class="far fa-calendar-alt me-2"></i>{MainData.date}
+                    <i className="far fa-calendar-alt me-2"></i>{MainData.created_at}
                 </p>
             </Row>
             <hr />
             <Row className="news-detail-content mb-4 mt-4">
-                <p className="">{MainData.content}</p>
+                <p className="">{}</p>
+                <Editor readOnly={true}
+                    editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(MainData.page_content)))}
+                    toolbar={{
+                        options: []
+                    }}
+                    toolbarClassName = "rmtoolbar" />
             </Row>
              <Row >
                 <div className="d-flex justify-content-center" style={{
                     padding: "0 20px"
                 }}>
                     {
-                        MainData.images.length === 1 ?
+                        MainData.images.length <=1 ?
                             (
                                 <figure className="main-news-img"
                                     style={{
@@ -56,13 +54,13 @@ const Layout = ({ data }) => {
                                         margin: "40px auto",
                                         display:"inline-table"
                                     }}>
-                                    <img src={MainData.images[0].image} alt="" className="img-fluid"></img>
+                                    <img src={MainData.images.length!==0?MainData.images[0].image:""} alt="" className="img-fluid"></img>
                                 </figure>
                             )
                             :
                                 (<Carousel
                                     data={MainData.images}
-                                    time={2000}
+                                    time={5000}
                                     width="850px"
                                     height="500px"
                                     captionStyle={captionStyle}

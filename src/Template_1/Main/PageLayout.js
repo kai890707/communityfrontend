@@ -1,8 +1,8 @@
 
 
 
-import { Navbar, Container, NavDropdown, Nav,Row,Col } from 'react-bootstrap';
-import React, { useState, useContext } from 'react';
+import {Container,Row,Col } from 'react-bootstrap';
+import React from 'react';
 import './Main.scss';
 
 
@@ -16,14 +16,11 @@ import {
     useLocation
 } from "react-router-dom";
 const Layout = ({ data }) => {
-    // const theme = useContext(Content);
     const MainData = data.data;
     const list = data.data.list;
-    // console.log(theme.history.location.pathname);
     return (
         <Container className="main-feature ">
             {
-                // console.log(list.length)
                 list.map((item, i) => {
                     console.log(i);
                    return (i % 2 == 0) ? (

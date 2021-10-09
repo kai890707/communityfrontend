@@ -1,16 +1,9 @@
-import React, {useState, useEffect,useContext} from 'react';
+import React from 'react';
 import {
     Container,
     Row,
-    Col,
-    FloatingLabel,
-    Form,
-    Button
 } from 'react-bootstrap';
-import {useForm} from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
-// import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe} from '../Api/Api';
-import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
 const NotLogin = ()=>{
     const style = {
         height: '100vh',

@@ -222,11 +222,11 @@ const Layout = () => {
                             </Form>
                         </Row>
                     </Tab>
-                    <Tab eventKey="profile" title="首頁設定">
+                    {/* <Tab eventKey="profile" title="首頁設定">
                         <Row className="bg-white p-4">
                             
                         </Row>
-                    </Tab>
+                    </Tab> */}
                 </Tabs>
             </Row>
         </Container>

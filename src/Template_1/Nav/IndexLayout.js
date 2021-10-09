@@ -1,21 +1,9 @@
-import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
-import React, { useState, useContext } from 'react';
+import { Navbar, Container, Nav } from 'react-bootstrap';
+import React from 'react';
 import './Nav.scss';
-import { Content } from '../Layout';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
-const Layout = (props) => {
-    const theme = useContext(Content);
-    const NavData = theme.pageData.Nav.data;
-    console.log('n',NavData);
-    // console.log(theme.history.location.pathname);
+const Layout = ({data}) => {
+    const NavData = data.data;
+
     return (
         <Navbar bg="white" expand="lg" className="pt-4 pb-4 nav">
             <Container>
@@ -29,17 +17,8 @@ const Layout = (props) => {
                                return <Nav.Link href={list.path} key={index} className="nav-text fs-5 fw-bold">{list.name}</Nav.Link>
                             })
                         }
-                        {/* <Nav.Link href="#link">Link</Nav.Link> */}
+                     
                     </Nav>
-                      {/* <Router ></Router>
-                    <Switch>
-                        <Route path='/保社社區/社區公告/1' exact render={() => <div>社區消息</div>} />
-                    
-
-                    
-                    </Switch> */}
-
-                 
                 </Navbar.Collapse>
             </Container>
         </Navbar>

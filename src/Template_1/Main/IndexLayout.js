@@ -1,14 +1,14 @@
-import React, {useState,useContext} from 'react';
-import { Content } from '../Layout';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import {
+    Link,
+} from "react-router-dom";
 import './Main.scss';
 // 
-const Layout = () => {
-    const theme = useContext(Content);
-    const MainData = theme.pageData.Main;
-    const News = theme.pageData.Main.data.news;
-    const aboutUs = theme.pageData.Main.data.aboutUs;
+const Layout = ({data}) => {
+    const MainData = data;
+    const News = MainData.data.news;
+    const aboutUs = MainData.data.aboutUs;
     console.log("main",News);
     return (
         <>
@@ -24,17 +24,20 @@ const Layout = () => {
                         </Col>
                     </Row>
                      <Container>
-                        <Row className="mt-5">
+                        <Row className="mt-5 justify-content-center">
                             {
                                 News.map((news) => {
+                                    /**將原page content 物件提取內容成純文字 */
+                                var blocks =  JSON.parse(news.page_content).blocks;
+                                var value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
                                     return (
-                                <div className="col-lg-4 mb-4 d-flex align-items-stretch" key={news.id}>
+                                <div className="col-lg-4 mb-4 d-flex justify-content-center align-items-stretch" key={news.id}>
                                     <div className="card  shadow-sm">
-                                    <img src={news.images} className="card-img-top card-img-height" alt="Card Image" />
+                                    <img src={news.page_chosen} className="card-img-top card-img-height" alt="Card Image" />
                                     <div className="card-body d-flex flex-column">
-                                        <h4 className="card-title fw-bold">{news.title}</h4>
-                                        <p className="card-text mb-4 card-text-overflow"> {news.content}</p>
-                                        <a href="#" className="btn btn-primary mt-auto align-self-start btn-gotoNews">前往了解</a>
+                                        <h4 className="card-title fw-bold text-center mb-4">{news.page_title}</h4>
+                                        <p className="card-text mb-4 card-text-overflow ps-2 pe-2">{value}</p>
+                                        <Link to={`社區公告/${news.id}`} className="mt-3 btn btn-primary mt-auto align-self-center btn-gotoNews">前往了解</Link>
                                     </div>
                                     </div>
                                 </div>
@@ -44,9 +47,9 @@ const Layout = () => {
                         </Row>
                         <Row className="mt-5">
                             <div className="d-flex justify-content-center">
-                                <Button size="lg" className="btn-look-more">
+                                <Link to={"/社區公告"} size="lg" className="btn btn-lg btn-look-more">
                                     查看更多
-                                </Button>
+                                </Link>
                             </div>
                         </Row>
                         </Container>
@@ -59,13 +62,13 @@ const Layout = () => {
                 <Row>
                          <Col className="block3-col-1" xl={6} md={12} xs={12}>
                     <Row>
-                        <img src={aboutUs.Images} alt="" className="img-fluid p-0"/>
+                        <img src={aboutUs.image} alt="" className="img-fluid p-0"/>
                     </Row>
                     <Row>
                         <div className="container p-4 aboutUs-bottom-bg">
                             <h2
                                 className="text-white d-flex justify-content-center align-items-center fw-bold display-5">關於我們</h2>
-                            {/* <h4 className="text-white d-flex justify-content-center align-items-center m-4">Text Text Text Text Text Text Text Text Text</h4> */}
+                          
                         </div>
                     </Row>
 
@@ -93,18 +96,6 @@ const Layout = () => {
                     </Row>
                 </Container>
             </section>
-            {/* <section id="feature"  className="main-feature">
-                <Container className="mb-4">
-                    <Row>
-                        <Col xs={12} className="d-flex justify-content-center align-items-center">
-                            <h2 className="display-5 fw-bold main-feature-title ">社區特色</h2>
-                        </Col>
-                        <Col xs={12} className="d-flex justify-content-center align-items-center">
-                            <hr className="title-hr text-center" />
-                        </Col>
-                    </Row>
-                </Container>
-            </section> */}
             </>
     );
 }

@@ -1,21 +1,9 @@
-import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
-import React, { useState, useContext } from 'react';
+import { Navbar, Container, Nav } from 'react-bootstrap';
+import Reac from 'react';
 import './Nav.scss';
-
-
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
 const Layout = ({ data }) => {
-    // const theme = useContext(Content);
     const NavData = data.data;
-    // console.log(theme.history.location.pathname);
+
     return (
         <Navbar bg="white" expand="lg" className="pt-4 pb-4 nav">
             <Container>

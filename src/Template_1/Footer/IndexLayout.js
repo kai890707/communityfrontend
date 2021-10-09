@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react';
 import {Content} from '../Layout';
 import './Footer.scss';
-const Layout = () => {
+const Layout = ({data}) => {
     const theme = useContext(Content);
-    const FooterData = theme.pageData.Footer.data;
+    const FooterData = data.data;
     const contact = FooterData.contact; 
      const aboutUs = FooterData.aboutUs;
 
@@ -37,7 +37,7 @@ const Layout = () => {
                             </h6>
                             <p>
                                 <a href="/login">
-                                    <img src="http://120.119.77.99:3000/assets/images/backend.png"  className="img-fluid" alt="後臺入口" />
+                                    <img src="/assets/images/backend.png"  className="img-fluid" alt="後臺入口" />
                                 </a>
                             </p>
                         </div>
@@ -47,13 +47,13 @@ const Layout = () => {
                                 社群連結
                             </h6>
                             <p>
-                                <a href="">
-                                    <img src="http://120.119.77.99:3000/assets/images/facebook.jpg"  className="img-fluid footer-img" alt="FB粉專" />
+                                <a href={contact.facebook==="default"?"/":contact.facebook} >
+                                    <img src={"/assets/images/facebook.jpg"}  className="img-fluid footer-img" alt="FB粉專" />
                                 </a>
                             </p>
                             <p>
-                                <a href="">
-                                    <img src="http://120.119.77.99:3000/assets/images/ig.png"  className="img-fluid footer-img" alt="IG粉專" />
+                                <a href={contact.instagram==="default"?"/":contact.instagram}>
+                                    <img src="/assets/images/ig.png"  className="img-fluid footer-img" alt="IG粉專" />
                                 </a>
                             </p>
                         </div>

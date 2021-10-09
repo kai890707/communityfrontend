@@ -1,28 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {
-    Container,
-    Row,
-    Col,
-    FloatingLabel,
-    Form,
-    Button,
+
     Collapse,
-    Nav,
-    OverlayTrigger,
-    Popover 
+    Nav
 } from 'react-bootstrap';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    Redirect,
     useHistory,
-  useLocation,
-    useParams
+    useLocation,
 } from "react-router-dom";
 import './Layout.scss';
-import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,setLocalStorage,getLocalStorage} from '../Api/Api';
+import {setAuthToken,setLocalStorage,getLocalStorage} from '../Api/Api';
 import Swal from 'sweetalert2';
 const Layout = () => {
     const [openArticle,

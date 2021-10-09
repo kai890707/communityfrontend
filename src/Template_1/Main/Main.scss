@@ -178,3 +178,16 @@
 .news-detail-content {
     font-size: 22px;
 }
+.rmtoolbar{
+    padding: 0px !important;
+    border-radius: 0px !important;
+    border: 0px solid #F1F1F1!important;
+    display: none;
+    justify-content: flex-start;
+    background: white;
+    flex-wrap: wrap;
+    font-size: 0px !important;
+    margin-bottom: 0px !important;
+    -webkit-user-select: none;
+    user-select: none;
+}
