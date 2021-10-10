@@ -16,7 +16,7 @@ import NoMatch from './404/Layout';
 import Template from './Template_1/Layout';
 import TEMPLATE2 from './Template_2/Layout';
 import News from './Template_1/Pages/News';
-
+import Base from './Api/Base';
 // export const Content = createContext(Routers);
 // function RouteWithSubRoutes(route) {
 //     return (
@@ -45,7 +45,7 @@ const App=() =>{
   // const [user, setUser] = useState(null);
   return (
     // <AuthContext.Provider value={{user, setUser}}>
-      <Router >
+      <Router  basename={Base.baseName}>
       
           <Switch>
           {

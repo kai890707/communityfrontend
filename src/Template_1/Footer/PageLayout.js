@@ -1,6 +1,8 @@
 import React, {useState, useContext} from 'react';
 
 import './Footer.scss';
+// import backendImg from '../../../public/assets/images/backend.png';
+import Base from '../../Api/Base';
 const Layout = ({ data}) => {
     const FooterData = data.data;
     const contact = FooterData.contact; 
@@ -36,7 +38,7 @@ const Layout = ({ data}) => {
                             </h6>
                             <p>
                                 <a href="/login">
-                                    <img src="/assets/images/backend.png"  className="img-fluid" alt="後臺入口" />
+                                    <img src={`${Base.imgBaseName}/assets/images/backend.png`}  className="img-fluid" alt="後臺入口" />
                                 </a>
                             </p>
                         </div>
@@ -47,12 +49,12 @@ const Layout = ({ data}) => {
                             </h6>
                             <p>
                                 <a href={contact.facebook==="default"?"/":contact.facebook} >
-                                    <img src={"/assets/images/facebook.jpg"}  className="img-fluid footer-img" alt="FB粉專" />
+                                    <img src={`${Base.imgBaseName}/assets/images/facebook.jpg`}  className="img-fluid footer-img" alt="FB粉專" />
                                 </a>
                             </p>
                             <p>
                                 <a href={contact.instagram==="default"?"/":contact.instagram}>
-                                    <img src="/assets/images/ig.png"  className="img-fluid footer-img" alt="IG粉專" />
+                                    <img src={`${Base.imgBaseName}/assets/images/ig.png`}   className="img-fluid footer-img" alt="IG粉專" />
                                 </a>
                             </p>
                         </div>

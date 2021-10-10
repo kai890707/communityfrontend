@@ -1,6 +1,17 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import Reac from 'react';
+import React from 'react';
 import './Nav.scss';
+import Base from '../../Api/Base';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect,
+    useHistory,
+  useLocation,
+    useParams
+} from "react-router-dom";
 const Layout = ({ data }) => {
     const NavData = data.data;
 
@@ -13,7 +24,7 @@ const Layout = ({ data }) => {
                     <Nav className="ms-auto ">
                         {
                             NavData.list.map((list,index) => {
-                               return <Nav.Link href={list.path} key={index} className="nav-text fs-5 fw-bold">{list.name}</Nav.Link>
+                               return <Link to={`${list.path}`} key={index} className="nav-link nav-text fs-5 fw-bold">{list.name}</Link>
                             })
                         }
                     </Nav>

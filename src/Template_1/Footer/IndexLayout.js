@@ -1,12 +1,17 @@
 import React, {useState, useContext} from 'react';
 import {Content} from '../Layout';
 import './Footer.scss';
+import {
+
+    Link,
+
+} from "react-router-dom";
+import Base from '../../Api/Base';
 const Layout = ({data}) => {
     const theme = useContext(Content);
     const FooterData = data.data;
     const contact = FooterData.contact; 
      const aboutUs = FooterData.aboutUs;
-
     const style = {
         width: "60px",
         backgroundColor: "#7c4dff",
@@ -36,9 +41,9 @@ const Layout = ({data}) => {
                                 相關連結
                             </h6>
                             <p>
-                                <a href="/login">
-                                    <img src="/assets/images/backend.png"  className="img-fluid" alt="後臺入口" />
-                                </a>
+                                <Link to="/login">
+                                    <img src={`${Base.imgBaseName}/assets/images/backend.png`}  className="img-fluid" alt="後臺入口" />
+                                </Link>
                             </p>
                         </div>
                     <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mb-5">
@@ -48,12 +53,12 @@ const Layout = ({data}) => {
                             </h6>
                             <p>
                                 <a href={contact.facebook==="default"?"/":contact.facebook} >
-                                    <img src={"/assets/images/facebook.jpg"}  className="img-fluid footer-img" alt="FB粉專" />
+                                    <img src={`${Base.imgBaseName}/assets/images/facebook.jpg`} className="img-fluid footer-img" alt="FB粉專" />
                                 </a>
                             </p>
                             <p>
                                 <a href={contact.instagram==="default"?"/":contact.instagram}>
-                                    <img src="/assets/images/ig.png"  className="img-fluid footer-img" alt="IG粉專" />
+                                    <img src={`${Base.imgBaseName}/assets/images/ig.png`}  className="img-fluid footer-img" alt="IG粉專" />
                                 </a>
                             </p>
                         </div>
@@ -117,8 +122,6 @@ const Layout = ({data}) => {
             </section>
 
             <div className="text-center p-4" style={style2}>
-
-                {/* <a className="text-reset fw-bold" href="">STU LAB0726</a> */}
                 <p className="text-reset fw-bold m-0">© {date}
                     Copyright STU CSIE LAB 0726</p>
             </div>
