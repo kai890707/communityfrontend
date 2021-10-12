@@ -20,7 +20,7 @@ const Login = () => {
         backgroundColor: '#FFC074'
     }
     const [isLogin, setIsLogin] = useState(false);
-    const [loading,setLoading] = useState(false);
+
     /**
      * [將勾選記住我的帳號儲存在localStorage]
      */
@@ -106,7 +106,7 @@ const Login = () => {
             getMe().then((res) => {
                 if (res.success) {
                     setIsLogin(true);
-                    setLoading(true);
+               
                 } else {
                     setAuthToken(null);
                 }
@@ -118,7 +118,7 @@ const Login = () => {
     return (
         <>
             {
-                loading===true?(isLogin===true ? (
+                (isLogin===true ? (
                     history.push("/backend")
                 ) : (
                     <Container
@@ -182,7 +182,7 @@ const Login = () => {
                             </Row>
                         </Container>
                     </Container>
-                )):(<div>載入中請稍後.......</div>)
+                ))
             }
         
     </>
