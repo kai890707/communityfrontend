@@ -45,7 +45,7 @@ const Layout =()=>{
     return (
         <Container fluid>
             <Row className="border-bottom p-3">
-                <h2 className="fw-bold">地方特產文章列表</h2>
+                <h2 className="fw-bold">地方景點文章列表</h2>
             </Row>
             <Row className="mt-4">
                 <Col className="m-2 pt-4 bg-white shadow-sm " >
