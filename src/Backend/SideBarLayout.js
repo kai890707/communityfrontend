@@ -10,7 +10,8 @@ import {
     useLocation,
 } from "react-router-dom";
 import './Layout.scss';
-import {setAuthToken,setLocalStorage,getLocalStorage} from '../Api/Api';
+import { setAuthToken, setLocalStorage, getLocalStorage } from '../Api/Api';
+import {tokenExpired,CustomSuccessAlert,CustomErrorAlert} from './../Api/Utils';
 import Swal from 'sweetalert2';
 const Layout = () => {
     const [openArticle,
@@ -33,14 +34,19 @@ const Layout = () => {
             if(res.isConfirmed){
                 setAuthToken("");
                 setLocalStorage('p',"");
-                history.push("/");
+                // history.push("/");
+                CustomSuccessAlert("登出成功!").then((result) => {
+                    if (result) {
+                        window.location.reload();
+                    }
+                    setTimeout(() => {
+                        window.location.reload();
+                    },2000)
+                })
+                
             }
           })
           };
-
-        useEffect(()=>{
-
-        },[]);
     return (
         <div className="col-auto col-md-1 col-xl-1 px-sm-2 px-0 sidebar-bg-color shadow-sm">
          

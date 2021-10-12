@@ -11,7 +11,7 @@ import {useForm} from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import {postApi,setAuthToken,getMe,setLocalStorage} from '../Api/Api';
 import Swal from 'sweetalert2';
-
+import {getAuthToken} from '../Api/Api';
 import './Login.scss';
 
 const Login = () => {
@@ -19,6 +19,8 @@ const Login = () => {
         height: '100vh',
         backgroundColor: '#FFC074'
     }
+    const [isLogin, setIsLogin] = useState(false);
+    const [loading,setLoading] = useState(false);
     /**
      * [將勾選記住我的帳號儲存在localStorage]
      */
@@ -98,70 +100,92 @@ const Login = () => {
         })
     };
     /**end */
+
+    useEffect(() => {
+        function me() {
+            getMe().then((res) => {
+                if (res.success) {
+                    setIsLogin(true);
+                    setLoading(true);
+                } else {
+                    setAuthToken(null);
+                }
+            })
+        }
+        me();
+    }, []);
+    
     return (
+        <>
+            {
+                loading===true?(isLogin===true ? (
+                    history.push("/backend")
+                ) : (
+                    <Container
+                        fluid
+                        className="bg-orange m-0 p-5 d-flex justify-content-center align-items-center"
+                        style={style}>
+                        <Container className="">
+                            <Row className="bg-light shadow border-radius-5">
+                                <Col md={6} xs={0} className="p-0 col-bg  border-radius-5">
+                                    {/* <div className="h-100">  <img src={img1} alt="img" className="img-fluid" style={style1}/></div> */}
 
-        <Container
-            fluid
-            className="bg-orange m-0 p-5 d-flex justify-content-center align-items-center"
-            style={style}>
-            <Container className="">
-                <Row className="bg-light shadow border-radius-5">
-                    <Col md={6} xs={0} className="p-0 col-bg  border-radius-5">
-                        {/* <div className="h-100">  <img src={img1} alt="img" className="img-fluid" style={style1}/></div> */}
+                                </Col>
+                                <Col md={6} xs={12} className="p-5">
+                                    <Row
+                                        className="text-center text-dark d-flex justify-content-center align-items-center m-4">
+                                        {/* <span className=" fw-bold text-orange">登入</span> */}
+                                        <h1 className="title">登入</h1>
+                                        <hr className="title-hr"/>
+                                    </Row>
+                                    <Row className="mb-5">
 
-                    </Col>
-                    <Col md={6} xs={12} className="p-5">
-                        <Row
-                            className="text-center text-dark d-flex justify-content-center align-items-center m-4">
-                            {/* <span className=" fw-bold text-orange">登入</span> */}
-                            <h1 className="title">登入</h1>
-                            <hr className="title-hr"/>
-                        </Row>
-                        <Row className="mb-5">
+                                        <Form onSubmit={handleSubmit(onSubmit)}>
+                                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                <FloatingLabel controlId="account" label="帳號" className="mb-3">
+                                                    <Form.Control
+                                                        type="text"
+                                                        name="account"
+                                                        className="input-custom"
+                                                        placeholder="name@example.com"
+                                                        defaultValue={name}
+                                                        {...register("account")}/>
+                                                </FloatingLabel>
+                                            </Form.Group>
 
-                            <Form onSubmit={handleSubmit(onSubmit)}>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <FloatingLabel controlId="account" label="帳號" className="mb-3">
-                                        <Form.Control
-                                            type="text"
-                                            name="account"
-                                            className="input-custom"
-                                            placeholder="name@example.com"
-                                            defaultValue={name}
-                                            {...register("account")}/>
-                                    </FloatingLabel>
-                                </Form.Group>
-
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <FloatingLabel controlId="password" label="密碼">
-                                        <Form.Control
-                                            type="password"
-                                            name="password"
-                                            className="input-custom"
-                                            placeholder="密碼"
-                                            {...register("password")}/>
-                                    </FloatingLabel>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="rememberMe">
-                                    <Form.Check
-                                        type="checkbox"
-                                        label="記住我"
-                                        className="input-custom"
-                                        onChange={() => handleChange()}/>
-                                </Form.Group>
-                                <Button
-                                    className="w-100 bg-orange btn-outline-orange fw-bold"
-                                    size="lg"
-                                    type="submit">
-                                    登入
-                                </Button>
-                            </Form>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-        </Container>
-
+                                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                                <FloatingLabel controlId="password" label="密碼">
+                                                    <Form.Control
+                                                        type="password"
+                                                        name="password"
+                                                        className="input-custom"
+                                                        placeholder="密碼"
+                                                        {...register("password")}/>
+                                                </FloatingLabel>
+                                            </Form.Group>
+                                            <Form.Group className="mb-3" controlId="rememberMe">
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label="記住我"
+                                                    className="input-custom"
+                                                    onChange={() => handleChange()}/>
+                                            </Form.Group>
+                                            <Button
+                                                className="w-100 bg-orange btn-outline-orange fw-bold"
+                                                size="lg"
+                                                type="submit">
+                                                登入
+                                            </Button>
+                                        </Form>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Container>
+                )):(<div>載入中請稍後.......</div>)
+            }
+        
+    </>
     );
 }
 export default Login;

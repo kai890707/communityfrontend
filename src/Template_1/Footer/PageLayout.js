@@ -1,5 +1,9 @@
 import React, {useState, useContext} from 'react';
+import {
 
+    Link,
+
+} from "react-router-dom";
 import './Footer.scss';
 // import backendImg from '../../../public/assets/images/backend.png';
 import Base from '../../Api/Base';
@@ -37,9 +41,9 @@ const Layout = ({ data}) => {
                                 相關連結
                             </h6>
                             <p>
-                                <a href="/login">
+                                <Link to="/login">
                                     <img src={`${Base.imgBaseName}/assets/images/backend.png`}  className="img-fluid" alt="後臺入口" />
-                                </a>
+                                </Link>
                             </p>
                         </div>
                     <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mb-5">
