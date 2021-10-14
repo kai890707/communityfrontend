@@ -33,7 +33,7 @@ const Layout = ({data}) => {
                                     return (
                                 <div className="col-lg-4 mb-4 d-flex justify-content-center align-items-stretch" key={news.id}>
                                     <div className="card  shadow-sm">
-                                    <img src={news.page_chosen} className="card-img-top card-img-height" alt="Card Image" />
+                                    <img src={news.page_chosen} className="card-img-top card-img-height img-fulid" style={{minHeight:"203px",minWidth:"300px" }} alt="Card Image" />
                                     <div className="card-body d-flex flex-column">
                                         <h4 className="card-title fw-bold text-center mb-4">{news.page_title}</h4>
                                         <p className="card-text mb-4 card-text-overflow ps-2 pe-2">{value}</p>

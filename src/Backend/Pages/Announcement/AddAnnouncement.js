@@ -18,7 +18,9 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw  } from "draft-js";
+import { EditorState, convertToRaw,convertFromRaw   } from "draft-js";
+// import { Editor, EditorState,convertToRaw,convertFromRaw ,RichUtils} from "draft-js";
+// import "draft-js/dist/Draft.css";
 import {postApi,setAuthToken,getAuthToken,tokenApi,getMe,tokenGetApi,tokenPostApi} from './../../../Api/Api';
 import {tokenExpired,CustomSuccessAlert,CustomErrorAlert} from './../../../Api/Utils';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
@@ -30,32 +32,34 @@ import Base from './../../../Api/Base';
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview,FilePondPluginFileValidateType,FilePondPluginFilePoster,FilePondPluginFileEncode);
 const Layout = () => {
     const [files, setFiles] = useState([]);
-    const [CarouselImage, setCarouselImage] = useState([])
-    var editorState = EditorState.createEmpty()
-    const [description, setDescription] = React.useState(editorState);
-    const setEditorState = (editorState) => {
-        // console.log('editorState', convertToRaw(editorState.getCurrentContent()))
-        setDescription(editorState)
-        // console.log('12', draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    const [CarouselImage, setCarouselImage] = useState([]);
+     const [editorState, setEditorState] = React.useState(() =>
+          EditorState.createEmpty()
+    );
+    // var editorState = EditorState.createEmpty()
+    // const [description, setDescription] = React.useState(editorState);
+    // const setEditorState = (editorState) => {
+    //     // console.log('editorState', convertToRaw(editorState.getCurrentContent()))
+    //     setDescription(editorState)
+    //     // console.log('12', draftToHtml(convertToRaw(editorState.getCurrentContent())))
         
-      }
+    //   }
     // console.log(CarouselImage[0].file);
-    function CustomEditor(){
-        return(
-            <Editor
-                name="content"
-                    editorState={description}
-                    toolbarClassName="toolbarClassName"
-                    wrapperClassName="wrapperClassName"
-                    editorClassName="editorClassName"
-                    onEditorStateChange={setEditorState}
-                toolbar={{
-                options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
-                }}
-            />
-        )
-      }  
-  
+    // function CustomEditor(){
+    //     return(
+    //         <Editor
+    //                 name="content"
+    //                 editorState={editorState}
+    //                 toolbarClassName="toolbarClassName"
+    //                 wrapperClassName="wrapperClassName"
+    //                 editorClassName="editorClassName"
+    //                 onEditorStateChange={setEditorState}
+    //                 toolbar={{
+    //                 options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
+    //                 }}
+    //         />
+    //     )
+    //   }  
     const {
         register,
         handleSubmit,
@@ -86,7 +90,10 @@ const Layout = () => {
         })     
         /**儲存完整HTML */
         // console.log(convertToRaw(description.getCurrentContent()));
-        formData.append('content',JSON.stringify(convertToRaw(description.getCurrentContent())));
+        // formData.append('content',JSON.stringify(convertToRaw(description.getCurrentContent())));
+        console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
+        console.log("解析",convertFromRaw(JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())))));
+        formData.append('content',JSON.stringify(convertToRaw(editorState.getCurrentContent())));
         formData.append("category_id",1);
         tokenPostApi('announcement/add',formData).then(
             (res)=>{
@@ -133,8 +140,34 @@ const Layout = () => {
                             </InputGroup>
                         </Row>
                         <Row className="w-100 mt-2" style={{display:"inline-block"}}>
-                        <CustomEditor />
-                   
+                        {/* <CustomEditor /> */}
+                        <Editor
+                    name="content"
+                    editorState={editorState}
+                    toolbarClassName="toolbarClassName"
+                    wrapperClassName="wrapperClassName"
+                    editorClassName="editorClassName"
+                    onEditorStateChange={setEditorState}
+                    toolbar={{
+                    options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
+                    }}
+            />
+                        {/* <button onMouseDown = {boldText}>Bold</button>
+                        <button onMouseDown = {H1}>H1</button> */}
+                        {/* <div
+                            style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
+                            onClick={focusEditor}
+                        >
+
+                            <Editor
+                            ref={editor}
+                            editorState={editorState}
+                            onChange={setEditorState}
+                            placeholder="Write something!"
+                            
+                            />
+                        </div> */}
+                        
                         </Row>
                         <Row className="mt-2">
                             <FilePond

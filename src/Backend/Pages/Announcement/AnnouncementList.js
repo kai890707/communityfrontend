@@ -10,25 +10,11 @@ import {
     Nav
 } from 'react-bootstrap';
 import {
-    BrowserRouter as Router,
-    HashRouter,
-    Switch,
-    Route,
-    Link,
-    Redirect,
     useHistory,
-    useLocation,
-    useParams
 } from "react-router-dom";
 // import ReactPaginate from 'react-paginate';
 import {postApi,setAuthToken,getAuthToken,tokenApi,AuthContext,getMe,tokenGetApi} from './../../../Api/Api';
 import {tokenExpired,CustomSuccessAlert,CustomErrorAlert} from './../../../Api/Utils';
-import Swal from 'sweetalert2';
-import { set } from 'react-hook-form';
-// import DataTable from 'react-data-table-component';
-// import DataTableExtensions from 'react-data-table-component-extensions';
-// import 'react-data-table-component-extensions/dist/index.css';
-// import styled from 'styled-components';
 import Table from "./../DataTable/DataTable";
 const Layout = () => {
     const history = useHistory();
@@ -53,7 +39,6 @@ const Layout = () => {
     useEffect(()=>{
         getListData();
     },[]);
-      const clickhandler = name => console.log("delete", name);
     return (
         <Container fluid>
             <Row className="border-bottom p-3">
@@ -61,21 +46,9 @@ const Layout = () => {
             </Row>
             <Row className="mt-4">
                 <Col className="m-2 pt-4 bg-white shadow-sm " >
-                    <Table data={data} click={clickhandler} />
+                    <Table data={data} />
                 </Col>
             </Row>
-            
-            {/* <ReactPaginate
-                    previousLabel={"上一頁"}
-                    nextLabel={"下一頁"}
-                    pageCount={pageCount}
-                    onPageChange={handlePageClick}
-                    containerClassName={"paginationBtnGroup"}
-                    previousLinkClassName={" previousBtn"}
-                    nextLinkClassName={"nextBtn"}
-                    disabledClassName={"paginationDisabled"}
-                    activeClassName={"paginationActive"}
-                /> */}
         </Container>
     );
 }

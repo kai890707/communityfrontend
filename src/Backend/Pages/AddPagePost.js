@@ -56,22 +56,7 @@ const Layout = () => {
         // console.log('12', draftToHtml(convertToRaw(editorState.getCurrentContent())))
         
       }
-    // console.log(CarouselImage[0].file);
-    function CustomEditor(){
-        return(
-            <Editor
-                name="content"
-                    editorState={description}
-                    toolbarClassName="toolbarClassName"
-                    wrapperClassName="wrapperClassName"
-                    editorClassName="editorClassName"
-                    onEditorStateChange={setEditorState}
-                toolbar={{
-                options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
-                }}
-            />
-        )
-      }  
+    
   
     const {
         register,
@@ -174,7 +159,17 @@ const Layout = () => {
                             </InputGroup>
                         </Row>
                         <Row className="w-100 mt-2" style={{display:"inline-block"}}>
-                        <CustomEditor />
+                        <Editor
+                            name="content"
+                                editorState={description}
+                                toolbarClassName="toolbarClassName"
+                                wrapperClassName="wrapperClassName"
+                                editorClassName="editorClassName"
+                                onEditorStateChange={setEditorState}
+                            toolbar={{
+                            options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
+                            }}
+                        />
                    
                         </Row>
                         <Row className="mt-2">

@@ -25,10 +25,30 @@ import {
 import {postApi,setAuthToken,getAuthToken,tokenApi,getMe,tokenGetApi,tokenPostApi} from './../../Api/Api';
 import {tokenExpired,CustomSuccessAlert,CustomErrorAlert} from './../../Api/Utils';
 import Swal from 'sweetalert2';
+import Table from "./DataTable/AccountTable";
 const Layout = () => {
      const [key,
         setKey] = useState('home');
     const [adminData,setAdminData] = useState([]);
+    const [tableData, setTableData] = useState([]);
+    const getAccountToTable =()=> {
+        tokenGetApi('account/getAccountToTable').then(
+            (res)=>{
+                if(res.status === 1){
+                    setTableData(res.data);
+                }else if(res.status === 0){
+                }
+                else if(res.status ===2){
+                    tokenExpired(res,'login');
+                }else{
+                    CustomErrorAlert("未知錯誤，請聯絡管理員");
+                }
+            },(err)=>{
+                CustomErrorAlert("未知錯誤，請聯絡管理員");
+            }
+        )
+      }
+
     /**取得admin資訊API */
     function getAccountInfo() {
         tokenGetApi('account/getAdminInfo').then(
@@ -105,6 +125,7 @@ const Layout = () => {
     }
     useEffect(()=>{
         getAccountInfo();
+        getAccountToTable();
     },[])
     return (
         <Container fluid>
@@ -227,6 +248,14 @@ const Layout = () => {
                                         </Col>
                                 </Row>
                                 </Form>
+                            </Col>
+                            
+                        </Row>
+                    </Tab>
+                    <Tab eventKey="show" title="權限列表">
+                        <Row className="bg-white p-4">
+                            <Col xs={12}>
+                                <Table data={tableData} />
                             </Col>
                             
                         </Row>

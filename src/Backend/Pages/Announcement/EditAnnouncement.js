@@ -56,21 +56,7 @@ const Layout = () => {
     const setEditorState = (editorState) => {
         setDescription(editorState)
       }
-    function CustomEditor(){
-        return(
-            <Editor
-                name="content"
-                editorState={description}
-                toolbarClassName="toolbarClassName"
-                wrapperClassName="wrapperClassName"
-                editorClassName="editorClassName"
-                onEditorStateChange={setEditorState}
-                toolbar={{
-                options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
-                }}
-            />
-        )
-      }  
+   
     const {
         register,
         handleSubmit,
@@ -203,7 +189,17 @@ const Layout = () => {
                                     </InputGroup>
                                 </Row>
                                 <Row className="w-100 mt-2" style={{display:"inline-block"}}>
-                                <CustomEditor />
+                                <Editor
+                                    name="content"
+                                    editorState={description}
+                                    toolbarClassName="toolbarClassName"
+                                    wrapperClassName="wrapperClassName"
+                                    editorClassName="editorClassName"
+                                    onEditorStateChange={setEditorState}
+                                    toolbar={{
+                                    options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
+                                    }}
+                                />
                                 </Row>
                                 <Row className="mt-2">
                                     <FilePond

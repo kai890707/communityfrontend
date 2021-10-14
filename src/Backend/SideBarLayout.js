@@ -61,10 +61,10 @@ const Layout = () => {
                     className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                     id="menu">
                     <li className="nav-item mt-2 mb-2">
-                        <a href="/backend" className="nav-link align-middle px-0 option-text"title="首頁">
+                        <Link to="/" className="nav-link align-middle px-0 option-text"title="首頁">
                             <i className="fs-6  far fa-home "></i>
                             <span className="fs-6 ms-2 d-none d-sm-inline ">首頁</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className=" mt-2 mb-2">
                         <Nav.Link
