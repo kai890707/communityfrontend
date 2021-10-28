@@ -41,7 +41,7 @@ const Layout = () => {
     // const setEditorState = (editorState) => {
     //     // console.log('editorState', convertToRaw(editorState.getCurrentContent()))
     //     setDescription(editorState)
-    //     // console.log('12', draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    //     // ('12', draftToHtml(convertToRaw(editorState.getCurrentContent())))
         
     //   }
     // console.log(CarouselImage[0].file);

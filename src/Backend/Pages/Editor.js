@@ -12,7 +12,6 @@ const WYSIWYGEditor = props => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const onEditorStateChange = editorState => {
     setEditorState(editorState);
-    console.log("PROPS ==> ", props);
     return props.onChange(
       draftToHtml(convertToRaw(editorState.getCurrentContent()))
     );

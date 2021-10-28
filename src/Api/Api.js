@@ -28,7 +28,6 @@ export function postApi(requireURL, datax = null) {
     var data = {
             data: JSON.stringify(datax)
         };
-    console.log(data);
     return new Promise((reslove, reject) => {
         fetch(Base.baseUrl+requireURL, {
             headers: {
@@ -51,7 +50,7 @@ export function tokenPostApi(requireURL,datax = null){
     // var data = {
     //     data: JSON.stringify(datax)
     // };
-    // console.log("d",data);
+
     return new Promise((reslove, reject) => {
         fetch(Base.baseUrl+requireURL, {
             headers: { 

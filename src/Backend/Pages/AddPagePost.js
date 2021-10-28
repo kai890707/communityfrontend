@@ -90,7 +90,7 @@ const Layout = () => {
         /**儲存完整HTML */
         // console.log(convertToRaw(description.getCurrentContent()));
         formData.append('content',JSON.stringify(convertToRaw(description.getCurrentContent())));
-        console.log(formData);
+        
         tokenPostApi('announcement/add',formData).then(
             (res)=>{
                 if(res.status === 1){

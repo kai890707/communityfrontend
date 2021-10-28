@@ -18,7 +18,6 @@ const content = (convertFromRaw(JSON.parse(MainData.page_content)));
     fontSize: '20px',
     fontWeight: 'bold',
   }
-    console.log(MainData);
     return (
         <Container className="main-news-details">
            

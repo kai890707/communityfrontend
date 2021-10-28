@@ -211,7 +211,6 @@ const Layout = () => {
                                             server={{
                                                 load: (source, load, error, progress, abort, headers) => {
                                                     var myRequest = new Request(source);
-                                                    console.log(myRequest);
                                                     fetch(myRequest)
                                                     .then(function(response) {
                                                     response.blob().then(function(myBlob) {

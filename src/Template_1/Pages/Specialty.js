@@ -14,8 +14,6 @@ const Specialty = () => {
             getApi('page/getNewsPage/3').then((res)=>{
                 setPageData(res);
                 setLoadingFetch(true);
-                   
-                console.log('res',res);
                 })
         }
         getIndexData();

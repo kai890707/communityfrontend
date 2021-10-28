@@ -22,7 +22,6 @@ const Layout = ({ data }) => {
         <Container className="main-feature ">
             {
                 list.map((item, i) => {
-                    console.log(i);
                    return (i % 2 == 0) ? (
                         <Row className="main-feature-row animate__animated animate__backInRight">
                             <Col md={{span:6,order: 1}} xs={{span:12,order: 2}}  className="d-flex justify-content-center align-items-center  z-2">

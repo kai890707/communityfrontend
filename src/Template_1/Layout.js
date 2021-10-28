@@ -14,13 +14,10 @@ const Template = () => {
             getApi('page/getIndexData').then((res)=>{
                 setPageData(res);
                 setLoadingFetch(true);
-                   
-                console.log('res',res);
                 })
         }
         getIndexData();
     },[]);
-    console.log("pageData",pageData);
     // const data = {
     //     name: "保社社區",
     //     pageData: {

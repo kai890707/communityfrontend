@@ -58,7 +58,6 @@ const App=() =>{
             //       <route.component routes={route.routes} />
             //     </Route>
             // );
-              console.log(route);
               return <RouteWithSubRoutes key={route.path} {...route}   />
     
             })

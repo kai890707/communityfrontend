@@ -9,7 +9,6 @@ const Layout = ({data}) => {
     const MainData = data;
     const News = MainData.data.news;
     const aboutUs = MainData.data.aboutUs;
-    console.log("main",News);
     return (
         <>
         <section id="main-new" className="main-news border-bottom">
