@@ -49,7 +49,6 @@ const Layout =()=>{
     useEffect(()=>{
         getListData();
     },[]);
-      const clickhandler = name => console.log("delete", name);
     return (
         <Container fluid>
             <Row className="border-bottom p-3">
@@ -57,7 +56,7 @@ const Layout =()=>{
             </Row>
             <Row className="mt-4">
                 <Col className="m-2 pt-4 bg-white shadow-sm " >
-                    <Table data={data} click={clickhandler} />
+                    <Table data={data}/>
                 </Col>
             </Row>
             

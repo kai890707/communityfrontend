@@ -91,8 +91,8 @@ const Layout = () => {
         /**儲存完整HTML */
         // console.log(convertToRaw(description.getCurrentContent()));
         // formData.append('content',JSON.stringify(convertToRaw(description.getCurrentContent())));
-        console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
-        console.log("解析",convertFromRaw(JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())))));
+        // console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
+        // console.log("解析",convertFromRaw(JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())))));
         formData.append('content',JSON.stringify(convertToRaw(editorState.getCurrentContent())));
         formData.append("category_id",1);
         tokenPostApi('announcement/add',formData).then(
@@ -118,14 +118,7 @@ const Layout = () => {
             }
         )
       };
-    //   function createMarkup() {
-    //     return {__html: draftToHtml(convertToRaw(editorState.getCurrentContent()))};
-    //   }
-      
-    //   function MyComponent() {
-    //     return <div dangerouslySetInnerHTML={createMarkup()} />;
-    //   }
-      
+
     return (
        <Container fluid>
             <Row className="border-bottom p-3">
@@ -140,7 +133,6 @@ const Layout = () => {
                             </InputGroup>
                         </Row>
                         <Row className="w-100 mt-2" style={{display:"inline-block"}}>
-                        {/* <CustomEditor /> */}
                         <Editor
                     name="content"
                     editorState={editorState}
@@ -152,22 +144,6 @@ const Layout = () => {
                     options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history']
                     }}
             />
-                        {/* <button onMouseDown = {boldText}>Bold</button>
-                        <button onMouseDown = {H1}>H1</button> */}
-                        {/* <div
-                            style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
-                            onClick={focusEditor}
-                        >
-
-                            <Editor
-                            ref={editor}
-                            editorState={editorState}
-                            onChange={setEditorState}
-                            placeholder="Write something!"
-                            
-                            />
-                        </div> */}
-                        
                         </Row>
                         <Row className="mt-2">
                             <FilePond

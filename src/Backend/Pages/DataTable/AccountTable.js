@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
+import { Navbar, Container, NavDropdown, Nav,Row,Col } from 'react-bootstrap';
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent";
@@ -35,31 +35,27 @@ const Table = props => {
       sortable: true,
       hide: "md"
     },
-    // {
-    //   name: "修改時間",
-    //   selector: row =>row.updated_at,
-    //   sortable: true,
-    //   hide: "md"
-    // },
     {
       name: "操作",
-    //   button: true,
-    //   grow: 2,
       cell: row =>
-        
         <>
-            <Form.Select aria-label="Default select example" onChange={handleChange} id={row.id}>
-                <option value={row.permission}>{row.permission === "admin"?"管理員":"編輯者"}</option>
-                {
-                    row.permission === "admin"?(
-                        <option value="normal">編輯者</option>
-                    ):(
-                        <option value="admin">管理員</option>
-                    )
-                }
-                
-               
-            </Form.Select>
+          <Row>
+            <Col md={7}>
+              <Form.Select aria-label="Default select example" onChange={handleChange} id={row.id}>
+                    <option value={row.permission}>{row.permission === "admin"?"管理員":"編輯者"}</option>
+                    {
+                        row.permission === "admin"?(
+                            <option value="normal">編輯者</option>
+                        ):(
+                            <option value="admin">管理員</option>
+                        )
+                    }
+              </Form.Select>
+            </Col>
+            <Col md={5}>
+                  <button className="btn btn-danger" onClick={deleteUser} id={row.id}>刪除</button>
+            </Col>
+          </Row>
           </>
     
     }
@@ -109,9 +105,53 @@ const Table = props => {
         }
         }
       })
-     
-     
-
+  }
+  const deleteUser = (e) => {
+    let userId = e.target.id;
+    Swal.fire({
+        title: '刪除帳號?',
+        text: "您確定要刪除帳號嗎?!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '是的!我要刪除',
+        cancelButtonText: '取消'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            if(getLocalStorage("p")==="admin"){
+                var formData = new FormData();
+              formData.append('userId', userId);
+              formData.append('userPermission',getLocalStorage('p'));
+                tokenPostApi('account/deleteUser',formData).then(
+                (res)=>{
+                    if(res.status == 1){
+                    Swal.fire(
+                        '成員刪除',
+                        '刪除成功',
+                        'success'
+                    ).then((result)=>{
+                        if(result){
+                        window.location.reload();
+                        }
+                    })
+                    }else if(res.status === 0){
+                    CustomErrorAlert("刪除失敗");
+                }
+                else if(res.status ===2){
+                    tokenExpired(res,'login');
+                } else if (res.status ===4) {
+                    CustomErrorAlert(res.message);   
+                }
+                },(err)=>{
+                    CustomErrorAlert("未知錯誤，請通知管理員");
+                }
+                )
+        }else{
+            CustomErrorAlert("權限不足");
+        }
+        }
+      })
   }
   const callDelApi = (pageId) =>{
     Swal.fire({
