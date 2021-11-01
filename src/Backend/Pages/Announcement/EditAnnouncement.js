@@ -129,6 +129,7 @@ const Layout = () => {
                         setCarouselImage([]);
                         /**儲存page data */
                         setPageData(res.data);
+                    
                         //將DB中的文章物件取出後解json並初始化傳入setEditorState中渲染至畫面
                         setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.content))));
                         // console.log(`${Base.baseUrl}${res.data.chosen}`);
@@ -228,10 +229,22 @@ const Layout = () => {
                                     <Card.Body>
                                         <Row className="mb-2">
                                             <Col><span>可見度</span></Col>
-                                            <Col>
-                                                <Form.Select size="sm"   {...register("status")}>
-                                                    <option value="T">公開</option>
-                                                    <option value="F">隱藏</option>
+                                                <Col>
+                                                    <Form.Select size="sm"  {...register("status")}>
+                                                        {
+                                                            pageData.status === "T" ? (
+                                                                <>
+                                                                <option value="T">公開</option>
+                                                                <option value="F">隱藏</option>
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                <option value="F">隱藏</option> 
+                                                                <option value="T">公開</option>  
+                                                            </>
+                                                            )
+                                                        }
+                                                    
                                                 </Form.Select>
                                             </Col>
                                         </Row>
